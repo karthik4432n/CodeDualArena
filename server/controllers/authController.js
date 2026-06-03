@@ -15,6 +15,10 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Please enter all fields." });
     }
 
+    if (/\s/.test(username)) {
+      return res.status(400).json({ message: "Username cannot contain spaces." });
+    }
+
     const trimmedUsername = username.trim();
     const trimmedEmail = email.trim().toLowerCase();
 

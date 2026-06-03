@@ -27,6 +27,10 @@ function Register() {
       setError("Please fill in all fields.");
       return;
     }
+    if (/\s/.test(username)) {
+      setError("Username cannot contain spaces.");
+      return;
+    }
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return;
