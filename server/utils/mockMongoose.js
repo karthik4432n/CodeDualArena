@@ -206,9 +206,31 @@ function createModel(modelName) {
     collectionName = "matches";
   }
 
+  const defaults = {};
+  if (modelName === "User") {
+    Object.assign(defaults, {
+      elo: 1000,
+      winStreak: 0,
+      maxWinStreak: 0,
+      totalMatches: 0,
+      wins: 0,
+      losses: 0,
+      solvedProblems: []
+    });
+  } else if (modelName === "Match") {
+    Object.assign(defaults, {
+      status: "pending",
+      player1Score: 0,
+      player2Score: 0,
+      player1PassedCases: 0,
+      player2PassedCases: 0,
+      duration: 0
+    });
+  }
+
   class MockModel {
     constructor(data) {
-      Object.assign(this, data);
+      Object.assign(this, defaults, data);
       if (!this._id) {
         this._id = generateId();
       }

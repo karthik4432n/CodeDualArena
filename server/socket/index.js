@@ -71,7 +71,9 @@ module.exports = (io) => {
           if (item.mode !== queueItem.mode) return false;
           // Simple ELO pairing: within 300 points (casual allows any pairing)
           if (queueItem.mode === "ranked") {
-            return Math.abs(item.user.elo - queueItem.user.elo) <= 300;
+            const elo1 = item.user.elo !== undefined && item.user.elo !== null ? item.user.elo : 1000;
+            const elo2 = queueItem.user.elo !== undefined && queueItem.user.elo !== null ? queueItem.user.elo : 1000;
+            return Math.abs(elo1 - elo2) <= 300;
           }
           return true; // Casual pairs immediately
         });
@@ -633,6 +635,10 @@ module.exports = (io) => {
           u1Score = winnerId === p1.userId ? 1 : 0;
           u2Score = winnerId === p2.userId ? 1 : 0;
         }
+
+        // Ensure elo defaults are populated to prevent NaN errors
+        u1.elo = u1.elo !== undefined && u1.elo !== null ? u1.elo : 1000;
+        u2.elo = u2.elo !== undefined && u2.elo !== null ? u2.elo : 1000;
 
         p1EloDiff = calculateElo(u1.elo, u2.elo, u1Score);
         p2EloDiff = calculateElo(u2.elo, u1.elo, u2Score);
