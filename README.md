@@ -191,7 +191,7 @@ Code Duel Arena follows:
 ## Clone Repository
 
 ```bash
-git clone https://github.com/your-username/code-duel-arena.git
+git clone https://github.com/karthik4432n/CodeDualArena.git
 ```
 
 ---
