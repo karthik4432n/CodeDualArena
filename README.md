@@ -22,6 +22,7 @@ Players compete against each other by solving the same DSA problems in real-time
 * 1v1 Matchmaking
 * Ranked Battles
 * Casual Practice Mode
+* Friend Duels (Private lobbies via unique 6-character room codes)
 * Live Opponent Status
 * Match Timer Synchronization
 
@@ -30,7 +31,7 @@ Players compete against each other by solving the same DSA problems in real-time
 ## 💻 Integrated Coding Environment
 
 * Monaco Editor Integration
-* Multiple Programming Languages
+* Supported Programming Languages: C (GCC), Python 3, C++ (GCC), Java (OpenJDK)
 * Run Custom Test Cases
 * Submit Solutions
 * Judge0 API Integration
@@ -98,19 +99,17 @@ code-duel-arena/
 ├── client/
 │   ├── src/
 │   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   ├── sockets/
 │   │   ├── context/
-│   │   └── utils/
+│   │   └── pages/
 │
-├── server/
-│   ├── routes/
-│   ├── controllers/
-│   ├── socket/
-│   ├── middleware/
-│   ├── models/
-│   └── utils/
+└── server/
+    ├── controllers/
+    ├── data/
+    ├── middleware/
+    ├── models/
+    ├── routes/
+    ├── socket/
+    └── utils/
 ```
 
 ---
@@ -156,6 +155,7 @@ code-duel-arena/
 Using Socket.IO:
 
 * Live Matchmaking
+* Private Match Lobbies (Host & Join codes)
 * Battle Synchronization
 * Real-Time Submissions
 * Opponent Progress Updates
@@ -191,7 +191,7 @@ Code Duel Arena follows:
 ## Clone Repository
 
 ```bash
-git clone https://github.com/karthik4432n/CodeDualArena.git
+git clone https://github.com/karthik4432n/CodeDuelArena.git
 ```
 
 ---
