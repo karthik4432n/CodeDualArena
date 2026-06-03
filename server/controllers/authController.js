@@ -15,25 +15,28 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Please enter all fields." });
     }
 
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+
     if (password.length < 6) {
       return res.status(400).json({ message: "Password must be at least 6 characters." });
     }
 
     // Check if user already exists
-    const emailExists = await User.findOne({ email });
+    const emailExists = await User.findOne({ email: trimmedEmail });
     if (emailExists) {
       return res.status(400).json({ message: "Email is already registered." });
     }
 
-    const usernameExists = await User.findOne({ username });
+    const usernameExists = await User.findOne({ username: trimmedUsername });
     if (usernameExists) {
       return res.status(400).json({ message: "Username is already taken." });
     }
 
     // Create user
     const user = new User({
-      username,
-      email,
+      username: trimmedUsername,
+      email: trimmedEmail,
       password,
     });
 
@@ -67,9 +70,11 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Please fill in all fields." });
     }
 
+    const trimmedEmail = email.trim();
+
     // Find User by email or username
     const user = await User.findOne({
-      $or: [{ email: email.toLowerCase() }, { username: email }],
+      $or: [{ email: trimmedEmail.toLowerCase() }, { username: trimmedEmail }],
     });
 
     if (!user) {
